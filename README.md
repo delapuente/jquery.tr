@@ -3,7 +3,7 @@ jquery.tr
 
 jquery.tr is a [jQuery](http://jquery.com/) plugin which enables you to translate text on the client side.
 
-Trunk notes
+Fork notes
 -----------
 
 This is a fork of the original project from Jonathan Giroux (Bloutiouf)
