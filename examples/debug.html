@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script src="../jquery.tr.js"></script>
+<script>
+/*
+ * This example shows that you can:
+ * - use $.tr.p to construct a translator function for simple plurals (1, more than one or zero cases)
+ * - use $.tr.g to construct a translator function for two genders (masculine or femininer)
+ * - use $.tr.gp to construct a translator function combining previous functionallities
+ * - use $.tr.s to construct a generic selection function
+ */
+ 
+    var my_spanish_dict = {
+        es: {
+            'Mercury' : 'Mercurio',
+            'Venus' : 'Venus',
+            'Mars' : 'Marte',
+        }
+    }
+
+    $.tr.language('es');
+    $.tr.dictionary(my_spanish_dict);
+    var tr = $.tr.translator();
+
+    $(document).ready(function() {
+        $.tr.debug(false);
+        $('#ex1').text(tr('Mercury'));
+        $('#ex2').text(tr('Venus'));
+        $('#ex3').text(tr('Earth'));
+        $('#ex4').text(tr('Mars'));
+
+        $.tr.debug(true);
+        $.tr.debugPrefix('missed key!! ');
+        $('#ex5').text(tr('Mercury'));
+        $('#ex6').text(tr('Venus'));
+        $('#ex7').text(tr('Earth'));
+        $('#ex8').text(tr('Mars'));
+    });
+
+</script>
+</head>
+<body>
+    <noscript>Enable Javascript.</noscript>
+    <p><strong>Debug mode OFF</strong></p>
+    <p id="ex1"></p>
+    <p id="ex2"></p>
+    <p id="ex3"></p>
+    <p id="ex4"></p>
+    <hr/>
+    <p><strong>Debug mode ON</strong></p>
+    <p id="ex5"></p>
+    <p id="ex6"></p>
+    <p id="ex7"></p>
+    <p id="ex8"></p>
+</body>
+</html>

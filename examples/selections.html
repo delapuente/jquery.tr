@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script src="../jquery.tr.js"></script>
+<script>
+/*
+ * This example shows that you can:
+ * - use $.tr.p to construct a translator function for simple plurals (1, more than one or zero cases)
+ * - use $.tr.g to construct a translator function for two genders (masculine or femininer)
+ * - use $.tr.gp to construct a translator function combining previous functionallities
+ * - use $.tr.s to construct a generic selection function
+ */
+ 
+    var my_spanish_dict = {
+        es: {
+            # zero option (the last one) is optional
+            'You have &count mail(s)' : $.tr.p('Tienes 1 correo', 'Tienes &count correos', 'No tienes correos'),
+            'Actor' : $.tr.gp('Actor', 'Actriz', 'Actores', 'Actrices'),
+            'Friend' : $.tr.g('Amigo', 'Amiga'),
+            'USA' : $.tr.s('EEUU', 'Estados Unidos')
+        }
+    }
+
+    $.tr.language('es');
+    $.tr.dictionary(my_spanish_dict);
+    var tr = $.tr.translator();
+
+    var masculine_friend = tr('Friend', {_g:'m'});
+    var feminine_friend = tr('Friend', {_g:'f'});
+    var short_usa = tr('USA', {_i:0});
+    var long_usa = tr('USA', {_i:1});
+    var masculine_singular_actor = tr('Actor', {_g:'m', _p:1});
+    var masculine_plural_actor = tr('Actor', {_g:'m', _p:2});
+    var feminine_singular_actor = tr('Actor', {_g:'f', _p:1});
+
+    # when no zero option is provided, zero is plural
+    var feminine_plural_actor = tr('Actor', {_g:'f', _p:0});
+
+    $(document).ready(function() {
+        $('#ex1').text(masculine_friend);
+        $('#ex2').text(feminine_friend);
+        $('#ex3').text(short_usa);
+        $('#ex4').text(long_usa);
+
+        var mails = 0;
+        $('#ex5').text(tr('You have &count mail(s)', {_p:mails}));
+        mails = 1;
+        $('#ex6').text(tr('You have &count mail(s)', {_p:mails}));
+        mails = 2;
+        $('#ex7').text(tr('You have &count mail(s)', {_p:mails, count:mails}));
+
+        $('#ex8').text(masculine_singular_actor);
+        $('#ex9').text(masculine_plural_actor);
+        $('#ex10').text(feminine_singular_actor);
+        $('#ex11').text(feminine_plural_actor);
+    });
+
+</script>
+</head>
+<body>
+    <noscript>Enable Javascript.</noscript>
+    <p id="ex1"></p>
+    <p id="ex2"></p>
+    <p id="ex3"></p>
+    <p id="ex4"></p>
+    <p id="ex5"></p>
+    <p id="ex6"></p>
+    <p id="ex7"></p>
+    <p id="ex8"></p>
+    <p id="ex9"></p>
+    <p id="ex10"></p>
+    <p id="ex11"></p>
+</body>
+</html>

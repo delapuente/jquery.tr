@@ -3,6 +3,14 @@ jquery.tr
 
 jquery.tr is a [jQuery](http://jquery.com/) plugin which enables you to translate text on the client side.
 
+Trunk notes
+-----------
+
+This is a fork of the original project from Jonathan Giroux (Bloutiouf)
+
+This trunk site: https://github.com/lodr/jquery.tr 
+Official site: https://github.com/Bloutiouf/jquery.tr
+
 Features
 --------
 
@@ -12,7 +20,7 @@ You can get or set the dictionary the plugin uses by calling `$.tr.dictionary`. 
 
 Alternatively, you may give an other dictionary when calling `$.tr.translator` which will be used instead of the global dictionary.
 
-You may also use a hierarchy of dictionaries, by giving the keys to `$.tr.transaltor`.  
+You may also use a hierarchy of dictionaries, by giving the keys to `$.tr.translator`.  
 
 Note that you may still use AJAX to retrieve the dictionary, but the plugin itself does not rely on AJAX to translate (it's not its goal).
 
@@ -22,11 +30,32 @@ $.getJSON('dictionary.php', function(data) {
 });
 ```
 
-### Translates into languages with several plurals
+### Translates into languages with several plurals or genre variations
 
 You can write generic sentences, but you may want to customize sentences involving numbers to be more grammatically correct. But some languages have up to six forms of plurals!
 
 By giving functions as dictionary's values, you can achieve this easily. The function has to return a string, used as the translated sentence. Because the function takes the parameters given to the translator, it should uses them to return different strings.
+
+With version 1.2, some generic selection constructors have been added to enable swicht between simple forms of plural / gender or more generic variations. Functions `$.tr.p`, `$.tr.g`, `$.tr.gp`, `$.tr.s` are provided and they can be used as inspiration for more complex selection functions. Check some examples below. Generic way to use these constructor is:
+
+```javascript
+var my_spanish_dict = {
+    es: { 
+		'You have &count mail(s)' : $.tr.p('Tienes 1 correo', 'Tienes &count correos', 'No tienes correos'),
+        'Friend' : $.tr.g('Amigo', 'Amiga'),
+		'USA' : $.tr.s('EEUU', 'Estados Unidos')
+	}
+}
+$.tr.dictionary(my_spanish_dict);
+var tr = $.tr.translator();
+var masculine_friend = tr('Friend', {_g:'m'});
+var feminine_friend = tr('Friend', {_g:'f'});
+var short_usa = tr('USA', {_i:0});
+var long_usa = tr('USA', {_i:1});
+var no_mails = tr('You have &count mail(s)', {_p:0});
+var one_mails = tr('You have &count mail(s)', {_p:1});
+var more_mails = tr('You have &count mail(s)', {_p:2, count:2});
+```
 
 ### Replaces parameters in translations
 
@@ -88,15 +117,24 @@ alert(tr('Hello world!'));
 Examples
 --------
 
-The [examples](https://github.com/Bloutiouf/jquery.tr/blob/master/examples) directory contains some examples:
+The [examples](https://github.com/lodr/jquery.tr/blob/master/examples) directory contains some examples:
 
-* [event.html](https://github.com/Bloutiouf/jquery.tr/blob/master/examples/event.html) uses select's change event and cookies
-* [plurals.html](https://github.com/Bloutiouf/jquery.tr/blob/master/examples/plurals.html) translates a sentence into languages with different plural rules
-* [simple.html](https://github.com/Bloutiouf/jquery.tr/blob/master/examples/simple.html) is a basic example
-* [subdictionaries.html](https://github.com/Bloutiouf/jquery.tr/blob/master/examples/subdictionaries.html) uses sub-dictionaries
+* [debug.html](https://github.com/lodr/jquery.tr/blob/master/examples/debug.html) shows debug mode
+* [event.html](https://github.com/lodr/jquery.tr/blob/master/examples/event.html) uses select's change event and cookies
+* [plurals.html](https://github.com/lodr/jquery.tr/blob/master/examples/plurals.html) translates a sentence into languages with different plural rules
+* [selections.html](https://github.com/lodr/jquery.tr/blob/master/examples/selections.html) uses generic selection constructor and specific gender / plural constructors
+* [simple.html](https://github.com/lodr/jquery.tr/blob/master/examples/simple.html) is a basic example
+* [subdictionaries.html](https://github.com/lodr/jquery.tr/blob/master/examples/subdictionaries.html) uses sub-dictionaries
 
 Changelog
 ---------
+
+### 1.2
+
+Added debug mode for missed keys detection
+Added generic selection constructors
+Added gender / plural specific selection constructors
+Added examples `selection.html` and `debug.html`
 
 ### 1.1
 
@@ -105,6 +143,7 @@ Removes rest of the former event feature.
 Misc
 ----
 
-Licensed under a MIT license, see the [LICENSE file](https://github.com/Bloutiouf/jquery.tr/blob/master/LICENSE).
+Licensed under a MIT license, see the [LICENSE file](https://github.com/lodr/jquery.tr/blob/master/LICENSE).
 
+This trunk site: https://github.com/lodr/jquery.tr 
 Official site: https://github.com/Bloutiouf/jquery.tr
