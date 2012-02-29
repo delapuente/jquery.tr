@@ -46,6 +46,7 @@ var my_spanish_dict = {
 		'USA' : $.tr.s('EEUU', 'Estados Unidos')
 	}
 }
+$.tr.language('es');
 $.tr.dictionary(my_spanish_dict);
 var tr = $.tr.translator();
 var masculine_friend = tr('Friend', {_g:'m'});
