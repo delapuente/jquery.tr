@@ -1,0 +1,38 @@
+{
+    "name": "jquery.tr",
+    "version": "1.2.0",
+    "title": "jQuery.tr()",
+    "author": {
+        "name": "Salvador de la Puente González",
+        "url": "https://github.com/lodr"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/MIT"
+        },
+    ],
+    "dependencies": {
+        "jquery": ">=1.0.0"
+    },
+    "description": "jquery.tr is a jQuery plugin which enables you to translate text on the client side.",
+    "keywords": [
+        "translating",
+        "plurals",
+        "genre",
+        "debug"
+    ],
+    "homepage": "http://unoyunodiez.com/proyectos/jquery-tr/",
+    "docs":"https://github.com/lodr/jquery.tr",
+    "demo":"https://github.com/lodr/jquery.tr/tree/master/examples",
+    "maintainers": [
+        {
+            "name": "Salvador de la Puente González",
+            "url": "https://github.com/lodr"
+        }
+    ],
+    "files": [
+        "jquery.color.js",
+        "jquery.tr.min.js"
+    ]
+}
