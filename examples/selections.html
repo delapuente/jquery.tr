@@ -15,7 +15,7 @@
  
     var my_spanish_dict = {
         es: {
-            # zero option (the last one) is optional
+            // zero option (the last one) is optional
             'You have &count mail(s)' : $.tr.p('Tienes 1 correo', 'Tienes &count correos', 'No tienes correos'),
             'Actor' : $.tr.gp('Actor', 'Actriz', 'Actores', 'Actrices'),
             'Friend' : $.tr.g('Amigo', 'Amiga'),
@@ -35,7 +35,7 @@
     var masculine_plural_actor = tr('Actor', {_g:'m', _p:2});
     var feminine_singular_actor = tr('Actor', {_g:'f', _p:1});
 
-    # when no zero option is provided, zero is plural
+    // when no zero option is provided, zero is plural
     var feminine_plural_actor = tr('Actor', {_g:'f', _p:0});
 
     $(document).ready(function() {

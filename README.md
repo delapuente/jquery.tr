@@ -111,6 +111,18 @@ var tr = $.tr.translator();
 var tr = $.tr.translator('sub-dictionary', ...);
 var tr = $.tr.translator(customDictionary, ...);
 
+// get debug mode
+var mode = $.tr.debug();
+
+// set debug mode
+$.tr.debug(true);
+
+// get debug prefix
+var prefix = $.tr.debugPrefix();
+
+// set debug prefix
+$.tr.debugPrefix('missed key!!');
+
 // using translator
 alert(tr('Hello world!'));
 ```
